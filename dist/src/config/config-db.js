@@ -15,3 +15,4 @@ const db = mysql2_1.default.createPool({
     queueLimit: 0
 });
 exports.default = db.promise();
+console.log("concetado");

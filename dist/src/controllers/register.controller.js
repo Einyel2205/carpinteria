@@ -18,11 +18,9 @@ const UserDto_1 = __importDefault(require("../Dto/UserDto"));
 let register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password, name, lastName, phoneNumber } = req.body;
-        console.log(req.body);
         const salt = yield bcryptjs_1.default.genSalt(10);
         const hashedPassword = yield bcryptjs_1.default.hash(password, salt);
         const result = yield userRepository_1.default.add(new UserDto_1.default(email, name, lastName, phoneNumber, hashedPassword));
-        console.log(result);
         return res.status(201).send({ status: 'register ok', password_hasheado: hashedPassword });
     }
     catch (error) {

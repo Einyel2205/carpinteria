@@ -8,17 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const bcrypt = require("bcryptjs");
-const db = require('../config/config-db.js');
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const userRepository_1 = __importDefault(require("../repositories/User/userRepository"));
 let auth = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        const sql = 'SELECT password FROM usuarios WHERE email=?';
-        const values = [email];
-        const result = yield db.execute(sql, values);
+        const result = yield userRepository_1.default.auth(email);
         if (result[0].length > 0) {
-            const isPasswordValid = yield bcrypt.compare(password, result[0][0].password);
+            const isPasswordValid = yield bcryptjs_1.default.compare(password, result[0][0].contrasenia);
             if (isPasswordValid) {
                 return res.status(200).json({
                     status: 'Successful authentication'

@@ -18,8 +18,14 @@ class UserRepository {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = 'INSERT INTO usuarios (email, nombres, apellidos, contrasenia, telefono) VALUES (?, ?, ?, ?, ?)';
             const values = [user.email, user.nombres, user.apellidos, user.password, user.telefono];
-            console.log("12312312", values);
-            console.log(config_db_1.default.execute(sql, values));
+            return config_db_1.default.execute(sql, values);
+        });
+    }
+    static auth(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = 'SELECT contrasenia FROM usuarios WHERE email = ?';
+            const values = [email];
+            return yield config_db_1.default.execute(sql, values);
         });
     }
 }

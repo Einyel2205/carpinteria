@@ -12,7 +12,5 @@ const db = mysql.createPool({
     queueLimit: 0
   });
   
-export default db.promise()
-
-
-console.log("conexion exitosa");
+export default db.promise();
+console.log("concetado");

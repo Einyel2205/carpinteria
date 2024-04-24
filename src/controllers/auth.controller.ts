@@ -1,5 +1,4 @@
-const bcrypt = require("bcryptjs");
-const db = require('../config/config-db.js');
+import bcrypt from 'bcryptjs';
 import UserRepository from "../repositories/User/userRepository";
 import { Request, Response } from "express";
 
@@ -9,11 +8,10 @@ let auth = async (req: Request, res: Response) => {
             email, 
             password
         } = req.body;
-        
         const result: any = await UserRepository.auth(email);
-
         if (result[0].length > 0){
-          const isPasswordValid = await bcrypt.compare(password, result[0][0].password);
+          const isPasswordValid = await bcrypt.compare(password, result[0][0].contrasenia);
+          
           if (isPasswordValid){
             return res.status(200).json({ 
               status: 'Successful authentication'
