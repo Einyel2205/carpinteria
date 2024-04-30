@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
-import UserRepository from '../repositories/User/userRepository';
-import User from '../Dto/UserDto';
+import UserRepository from '../../repositories/User/userRepository';
+import User from '../../Dto/UserDto';
 import { Request, Response } from "express";
 
 
